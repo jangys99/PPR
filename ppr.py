@@ -1,6 +1,7 @@
 import networkx as nx
 import re
 import torch
+import time
 import matplotlib.pyplot as plt
 from sentence_transformers import SentenceTransformer, util
 
@@ -216,8 +217,13 @@ def visualize_sg(G, highlights=None):
     
 
 if __name__ == "__main__":
-    model = SentenceTransformer('all-MiniLM-L6-v2')
+    if torch.cuda.is_available():
+        device = 'cuda'
+        print(f"Using GPU: {torch.cuda.get_device_name(0)}")
+        
+    model = SentenceTransformer('all-MiniLM-L6-v2', device=device)
     
+    # 현재는 실험 때문에 predefine했지만 LLM이 최초 한번만 목록들을 만들어주면 predefine 안해도 된다.
     TOOL = [
         "rag", "wet-wipe", "tissue", "paper-napkin", "paper-wipe",
         "mop", "vacuum", "towel", "sponge"
@@ -232,9 +238,6 @@ if __name__ == "__main__":
         "trash-bin", "garbage-bin", "trash-can", "garbage-can"
     ]
     
-    TASK = 'fold'     # leave, relocate, reorient, washing-up, fold, mop, wipe, vacuum, dispose, empty, turn-off, close
-    target_object = 'blanket_1'
-
     memory_stats = {
         "spoon": {
             "sink": 15,
@@ -251,33 +254,54 @@ if __name__ == "__main__":
         }
     }
     
+    # 실행 시작
+    total_start_time = time.perf_counter()
+    
+    TASK = 'dispose'     # relocate, washing-up, fold, dispose, mop, wipe, vacuum
+    target_object = 'paper_0'
+    
+    graph_start_time = time.perf_counter()
     G = build_scene_graph(origin_sg)
+    
+    graph_end_time = time.perf_counter()
+    graph_duration = graph_end_time - graph_start_time
+    
     highlights = {}
     
+    algo_start_time = time.perf_counter()
     if TASK == 'relocate' or 'dispose' or 'washing-up' or 'fold':
         if TASK == 'dispose':
             location, seeds = ppr_location(G, model, target_object, DISPOSE_RECEP, memory_stats=memory_stats)
         else:
             location, seeds = ppr_location(G, model, target_object, RECEPTACLE, memory_stats=memory_stats)
         
-        highlights[target_object] = 'orange'
-        for s in seeds:
-            highlights[s] = 'hotpink'
+        # highlights[target_object] = 'orange'
+        # for s in seeds:
+        #     highlights[s] = 'hotpink'
             
-        if location:
-            highlights[location] = 'gold'
+        # if location:
+        #     highlights[location] = 'gold'
     
     elif TASK == 'mop' or 'vacuum' or 'wipe':
         best_tool, seed_node = ppr_tool(G, model, target_object, TOOL)
-        
-        for node in seed_node.keys():
-            highlights[node] = 'orange'
+    
+    algo_end_time = time.perf_counter()
+    algo_duration = algo_end_time - algo_start_time
+    
+    total_end_time = time.perf_counter()
+    total_duration = total_end_time - total_start_time
+    
+    print(f"\n그래프 구축 완료 (소요시간: {graph_duration:.4f}초)")
+    print(f"알고리즘 실행 완료 (소요시간: {algo_duration:.4f}초)")
+    print(f"총 소요 시간 : {total_duration:.4f}초 (모델 로드 제외)")
+        # for node in seed_node.keys():
+        #     highlights[node] = 'orange'
             
-        if best_tool:
-            highlights[best_tool] = 'gold'
+        # if best_tool:
+        #     highlights[best_tool] = 'gold'
     
 
-    visualize_sg(G, highlights=highlights)
+    # visualize_sg(G, highlights=highlights)
 
     
     # print(f"Final Candidates: {candidates}")
