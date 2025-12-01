@@ -22,5 +22,13 @@
     {
         "task_info": {"task": "turn-off", "target": "sink_0"},
         "llm_output": "[find] <sink_0>[turn-off] <sink_0>"
+    },
+    {
+        "task_info": {"task": "relocate", "target": "plate_1"},
+        "llm_output": "[find] <plate_1>\n[pick] <plate_1>\n[find] <table_1>[relocate] <plate_1>"
+    },
+    {
+        "task_info": {"task": "relocate", "target": "shoes_0"},
+        "llm_output": "[find] <shoes_0>\n[pick] <shoes_0>\n[find] <cabinet_0>[relocate] <shoes_0>"
     }
 ]
