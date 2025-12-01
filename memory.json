@@ -1,0 +1,92 @@
+{
+    "washing-up": {
+        "task_id": "washing-up",
+        "template": [
+            "[find] <target>",
+            "[pick] <target>",
+            "[find] <location>",
+            "[task] <target>"
+        ],
+        "constraints": {
+            "target": "bowl",
+            "location": "RECEPTACLE"
+        },
+        "stats": {
+            "location_frequency": {
+                "sink": 2
+            },
+            "tool_frequency": {}
+        }
+    },
+    "relocate": {
+        "task_id": "relocate",
+        "template": [
+            "[find] <target>",
+            "[pick] <target>",
+            "[find] <location>",
+            "[task] <target>"
+        ],
+        "constraints": {
+            "target": "plate",
+            "location": "RECEPTACLE"
+        },
+        "stats": {
+            "location_frequency": {
+                "sink": 1
+            },
+            "tool_frequency": {}
+        }
+    },
+    "vacuum": {
+        "task_id": "vacuum",
+        "template": [
+            "[find] <tool>",
+            "[pick] <tool>",
+            "[find] <target>",
+            "[task] <target>"
+        ],
+        "constraints": {
+            "target": "debris",
+            "tool": "TOOL"
+        },
+        "stats": {
+            "location_frequency": {},
+            "tool_frequency": {
+                "vacuum": 1
+            }
+        }
+    },
+    "dispose": {
+        "task_id": "dispose",
+        "template": [
+            "[find] <target>",
+            "[pick] <target>",
+            "[find] <location>",
+            "[task] <target>"
+        ],
+        "constraints": {
+            "target": "paper",
+            "location": "RECEPTACLE"
+        },
+        "stats": {
+            "location_frequency": {
+                "garbage-bin": 1
+            },
+            "tool_frequency": {}
+        }
+    },
+    "turn-off": {
+        "task_id": "turn-off",
+        "template": [
+            "[find] <target>",
+            "[task] <target>"
+        ],
+        "constraints": {
+            "target": "sink"
+        },
+        "stats": {
+            "location_frequency": {},
+            "tool_frequency": {}
+        }
+    }
+}

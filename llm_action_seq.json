@@ -1,0 +1,26 @@
+[
+    {
+        "task_info": {"task": "washing-up", "target": "bowl_0"},
+        "llm_output": "[find] <bowl_0>\n[pick] <bowl_0>\n[find] <sink_0>[washing-up] <bowl_0>"
+    },
+    {
+        "task_info": {"task": "washing-up", "target": "plate_0"},
+        "llm_output": "[find] <plate_0>\n[pick] <plate_0>\n[find] <sink_0>[washing-up] <plate_0>"
+    },
+    {
+        "task_info": {"task": "relocate", "target": "plate_0"},
+        "llm_output": "[find] <plate_0>\n[pick] <plate_0>\n[find] <sink_0>[relocate] <plate_0>"
+    },
+    {
+        "task_info": {"task": "vacuum", "target": "debris_0"},
+        "llm_output": "[find] <vacuum_0>\n[pick] <vacuum_0>\n[find] <debris_0>[vacuum] <debris_0>"
+    },
+    {
+        "task_info": {"task": "dispose", "target": "paper_0"},
+        "llm_output": "[find] <paper_0>\n[pick] <paper_0>\n[find] <garbage-bin_0>[dispose] <paper_0>"
+    },
+    {
+        "task_info": {"task": "turn-off", "target": "sink_0"},
+        "llm_output": "[find] <sink_0>[turn-off] <sink_0>"
+    }
+]
