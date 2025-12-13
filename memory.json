@@ -1,92 +1,148 @@
 {
     "washing-up": {
-        "task_id": "washing-up",
-        "template": [
-            "[find] <target>",
-            "[pick] <target>",
-            "[find] <location>",
-            "[task] <target>"
-        ],
-        "constraints": {
-            "target": "bowl",
-            "location": "RECEPTACLE"
-        },
-        "stats": {
-            "location_frequency": {
-                "sink": 2
+        "bowl": {
+            "task_id": "washing-up",
+            "target_class": "bowl",
+            "template": [
+                "[find] <target>",
+                "[pick] <target>",
+                "[find] <location>",
+                "[task] <target>"
+            ],
+            "constraints": {
+                "target": "bowl",
+                "location": "RECEPTACLE"
             },
-            "tool_frequency": {}
+            "stats": {
+                "location_frequency": {
+                    "sink": 1
+                },
+                "tool_frequency": {}
+            }
+        },
+        "plate": {
+            "task_id": "washing-up",
+            "target_class": "plate",
+            "template": [
+                "[find] <target>",
+                "[pick] <target>",
+                "[find] <location>",
+                "[task] <target>"
+            ],
+            "constraints": {
+                "target": "plate",
+                "location": "RECEPTACLE"
+            },
+            "stats": {
+                "location_frequency": {
+                    "sink": 1
+                },
+                "tool_frequency": {}
+            }
         }
     },
     "relocate": {
-        "task_id": "relocate",
-        "template": [
-            "[find] <target>",
-            "[pick] <target>",
-            "[find] <location>",
-            "[task] <target>"
-        ],
-        "constraints": {
-            "target": "plate",
-            "location": "RECEPTACLE"
-        },
-        "stats": {
-            "location_frequency": {
-                "sink": 1
+        "plate": {
+            "task_id": "relocate",
+            "target_class": "plate",
+            "template": [
+                "[find] <target>",
+                "[pick] <target>",
+                "[find] <location>",
+                "[task] <target>"
+            ],
+            "constraints": {
+                "target": "plate",
+                "location": "RECEPTACLE"
             },
-            "tool_frequency": {}
+            "stats": {
+                "location_frequency": {
+                    "sink": 1,
+                    "table": 1
+                },
+                "tool_frequency": {}
+            }
+        },
+        "shoes": {
+            "task_id": "relocate",
+            "target_class": "shoes",
+            "template": [
+                "[find] <target>",
+                "[pick] <target>",
+                "[find] <location>",
+                "[task] <target>"
+            ],
+            "constraints": {
+                "target": "shoes",
+                "location": "RECEPTACLE"
+            },
+            "stats": {
+                "location_frequency": {
+                    "cabinet": 1
+                },
+                "tool_frequency": {}
+            }
         }
     },
     "vacuum": {
-        "task_id": "vacuum",
-        "template": [
-            "[find] <tool>",
-            "[pick] <tool>",
-            "[find] <target>",
-            "[task] <target>"
-        ],
-        "constraints": {
-            "target": "debris",
-            "tool": "TOOL"
-        },
-        "stats": {
-            "location_frequency": {},
-            "tool_frequency": {
-                "vacuum": 1
+        "debris": {
+            "task_id": "vacuum",
+            "target_class": "debris",
+            "template": [
+                "[find] <tool>",
+                "[pick] <tool>",
+                "[find] <target>",
+                "[task] <target>"
+            ],
+            "constraints": {
+                "target": "debris",
+                "tool": "TOOL"
+            },
+            "stats": {
+                "location_frequency": {},
+                "tool_frequency": {
+                    "vacuum": 1
+                }
             }
         }
     },
     "dispose": {
-        "task_id": "dispose",
-        "template": [
-            "[find] <target>",
-            "[pick] <target>",
-            "[find] <location>",
-            "[task] <target>"
-        ],
-        "constraints": {
-            "target": "paper",
-            "location": "RECEPTACLE"
-        },
-        "stats": {
-            "location_frequency": {
-                "garbage-bin": 1
+        "paper": {
+            "task_id": "dispose",
+            "target_class": "paper",
+            "template": [
+                "[find] <target>",
+                "[pick] <target>",
+                "[find] <location>",
+                "[task] <target>"
+            ],
+            "constraints": {
+                "target": "paper",
+                "location": "RECEPTACLE"
             },
-            "tool_frequency": {}
+            "stats": {
+                "location_frequency": {
+                    "garbage-bin": 1
+                },
+                "tool_frequency": {}
+            }
         }
     },
     "turn-off": {
-        "task_id": "turn-off",
-        "template": [
-            "[find] <target>",
-            "[task] <target>"
-        ],
-        "constraints": {
-            "target": "sink"
-        },
-        "stats": {
-            "location_frequency": {},
-            "tool_frequency": {}
+        "sink": {
+            "task_id": "turn-off",
+            "target_class": "sink",
+            "template": [
+                "[find] <target>",
+                "[task] <target>"
+            ],
+            "constraints": {
+                "target": "sink"
+            },
+            "stats": {
+                "location_frequency": {},
+                "tool_frequency": {}
+            }
         }
     }
 }

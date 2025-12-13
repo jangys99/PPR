@@ -87,6 +87,7 @@ def save_memory_json(task_info, template, current_stats):
 
     memory_entry = {
         "task_id": task_info['task'],
+        "target_class": target_class,
         "template": template,
         "constraints": constraints,
         "stats": stats_data
@@ -104,11 +105,16 @@ def load_memory_db(filename="memory.json"):
                 return {}
     return {}
 
+
 def update_memory_db(memory_db, new_entry):
     task_id = new_entry['task_id']
+    target_class = new_entry['target_class']
     
-    if task_id in memory_db:
-        existing_data = memory_db[task_id]
+    if task_id not in memory_db:
+        memory_db[task_id] = {}
+
+    if target_class in memory_db[task_id]:
+        existing_data = memory_db[task_id][target_class]
         
         new_locs = new_entry['stats']['location_frequency']
         for loc, count in new_locs.items():
@@ -119,9 +125,9 @@ def update_memory_db(memory_db, new_entry):
         for tool, count in new_tools.items():
             prev_count = existing_data['stats']['tool_frequency'].get(tool, 0)
             existing_data['stats']['tool_frequency'][tool] = prev_count + count
+            
     else:
-        print(f"New task entry: '{task_id}'")
-        memory_db[task_id] = new_entry
+        memory_db[task_id][target_class] = new_entry
         
     return memory_db
 
@@ -159,12 +165,12 @@ if __name__ == "__main__":
     processed_count = 0
     for data in input_data:
         task_info = data.get('task_info')
-        llm_out = data.get('llm_output')
+        llm_output = data.get('llm_output')
         
-        if not task_info or not llm_out:
+        if not task_info or not llm_output:
             continue
             
-        template, stats = generalize_action_sequence(llm_out, task_info, semantic_lists)
+        template, stats = generalize_action_sequence(llm_output, task_info, semantic_lists)
         entry = save_memory_json(task_info, template, stats)
         update_memory_db(memory_db, entry)
         
