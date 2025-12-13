@@ -257,8 +257,8 @@ if __name__ == "__main__":
     # 실행 시작
     total_start_time = time.perf_counter()
     
-    TASK = 'dispose'     # relocate, washing-up, fold, dispose, mop, wipe, vacuum
-    target_object = 'paper_0'
+    TASK = 'relocate'     # relocate, washing-up, fold, dispose, mop, wipe, vacuum
+    target_object = 'spoon_0'
     
     graph_start_time = time.perf_counter()
     G = build_scene_graph(origin_sg)
