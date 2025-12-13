@@ -258,7 +258,7 @@ if __name__ == "__main__":
     total_start_time = time.perf_counter()
     
     TASK = 'relocate'     # relocate, washing-up, fold, dispose, mop, wipe, vacuum
-    target_object = 'spoon_0'
+    target_object = 'plate_2'
     
     graph_start_time = time.perf_counter()
     G = build_scene_graph(origin_sg)
