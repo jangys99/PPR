@@ -109,7 +109,7 @@ def get_candidates_batch(graph, tool_list, model, threshold):
     
 
 def ppr_location(G, model, target_object, list, memory_stats=None):
-    similar_node = get_similar_node(G, target_object, model, threshold=0.5)
+    similar_node = get_similar_node(G, target_object, model, threshold=0.3)
     print(f"Similar node: {similar_node}")
     
     seed_weight = 1.0 / len(similar_node)
@@ -258,7 +258,7 @@ if __name__ == "__main__":
     total_start_time = time.perf_counter()
     
     TASK = 'relocate'     # relocate, washing-up, fold, dispose, mop, wipe, vacuum
-    target_object = 'spoon_0'
+    target_object = 'receptacle'
     
     graph_start_time = time.perf_counter()
     G = build_scene_graph(origin_sg)
